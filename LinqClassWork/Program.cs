@@ -18,8 +18,35 @@ namespace LinqClassWork
             CWSix();
             CWSeven();
             CWEight();
+            CWNine();
+            CWTen();
 
             Console.ReadLine();
+        }
+
+        private static void CWTen()
+        {
+            Console.WriteLine("將兩個物件組合，指定 KEY and value");
+
+            int[] data1 = { 1, 3, 5, 7, 9 };
+            int[] data2 = { 3, 7 };
+            foreach (var item in data1.Zip(data2, (x, y) => new { name=x,zip=y}))
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        private static void CWNine()
+        {
+            Console.WriteLine("Linq 延遲執行特性，只會執行一次");
+
+            int[] data1 = { 1, 3, 5, 7, 9 };
+            var result1 = data1.Where(a => a > 3);
+            var result2 = result1.Where(a => a > 7);
+            foreach (var item in result2)
+            {
+                Console.WriteLine(item);
+            }
         }
 
         private static void CWEight()
