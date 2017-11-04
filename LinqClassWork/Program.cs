@@ -10,7 +10,6 @@ namespace LinqClassWork
     {
         private static void Main(string[] args)
         {
-
             CWOne();
             CWTwo();
             CWThree();
@@ -41,6 +40,7 @@ namespace LinqClassWork
                           select (from c in name where c == 'a' select c).Count()).Sum();
 
             Console.WriteLine(countB);
+
             Console.WriteLine();
         }
 
@@ -99,6 +99,19 @@ namespace LinqClassWork
                 Console.WriteLine(item);
             }
             Console.WriteLine();
+
+            Console.WriteLine("Windows 資料夾中 drivers.ini");
+
+            var result2 = from s1 in Directory.GetFiles(@"C:\\Windows", "*.ini")
+                          let content = File.ReadAllText(s1)
+                          where content.Contains("drivers")
+                          select s1;
+
+            foreach (var item in result2)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine();
         }
 
         private static void CWOne()
@@ -139,7 +152,7 @@ namespace LinqClassWork
         }
     }
 
-    class Person2
+    internal class Person2
     {
         public int ID { get; set; }
         public string Name { get; set; }
