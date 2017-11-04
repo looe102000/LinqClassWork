@@ -17,27 +17,49 @@ namespace LinqClassWork
             CWFive();
             CWSix();
             CWSeven();
+            CWEight();
 
             Console.ReadLine();
+        }
+
+        private static void CWEight()
+        {
+            Console.WriteLine("Linq 自訂物件 Distinct ");
+            Console.WriteLine();
+
+            Person[] data1 = {
+                new Person() { Name = "code6421", Age = 15 },
+                new Person() { Name = "mary", Age = 11 },
+                new Person() { Name = "code6421", Age = 15 }
+            };
+            foreach (var item in data1.Distinct())
+            {
+                Console.WriteLine(item.Name);
+            }
+            Console.WriteLine();
         }
 
         private static void CWSeven()
         {
             Console.WriteLine("Linq 自訂物件 Except ");
             Console.WriteLine();
+
             Person[] data1 = {
                 new Person() { Name = "code6421", Age = 15 },
                 new Person() { Name = "mary", Age = 11 },
                 new Person() { Name = "jack", Age = 35 }
             };
+
             Person[] data2 = {
                 new Person() { Name = "mary", Age = 11 },
                 new Person() { Name = "jack", Age = 35 }
             };
+
             foreach (var item in data1.Except(data2))
             {
                 Console.WriteLine(item.Name);
             }
+            Console.WriteLine();
         }
 
         /// <summary>
