@@ -20,8 +20,45 @@ namespace LinqClassWork
             CWEight();
             CWNine();
             CWTen();
+            CWEleven();
 
             Console.ReadLine();
+        }
+
+        private static void CWEleven()
+        {
+            Console.WriteLine("指定某個欄位當KEY");
+            Console.WriteLine();
+
+            Person[] data1 = {
+                new Person() { Name = "code6421", Age = 10 },
+                new Person() { Name = "mary", Age = 11 },
+                new Person() { Name = "mark", Age = 12 }
+            };
+
+            // 1 : 1
+            Console.WriteLine("ToDictionary");
+            var result = data1.ToDictionary((a) => a.Age);
+            foreach (var item in result)
+            {
+                Console.WriteLine($"Key : {item.Key}, Name :{item.Value.Name}");
+            }
+            Console.WriteLine();
+
+
+            // 1 : N
+            Console.WriteLine("ToLookup");
+
+            var result2 = data1.ToLookup((a) => a.Age);
+            foreach (var item in result2)
+            {
+                Console.WriteLine($"---- {item.Key} -----");
+                foreach (var detail in item)
+                {
+                    Console.WriteLine($"---- {detail.Name} -----");
+                }
+            }
+            Console.WriteLine();
         }
 
         private static void CWTen()
@@ -34,6 +71,7 @@ namespace LinqClassWork
             {
                 Console.WriteLine(item);
             }
+            Console.WriteLine();
         }
 
         private static void CWNine()
@@ -47,6 +85,7 @@ namespace LinqClassWork
             {
                 Console.WriteLine(item);
             }
+            Console.WriteLine();
         }
 
         private static void CWEight()
