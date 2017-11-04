@@ -16,10 +16,33 @@ namespace LinqClassWork
             CWFour();
             CWFive();
             CWSix();
+            CWSeven();
 
             Console.ReadLine();
         }
 
+        private static void CWSeven()
+        {
+            Console.WriteLine("Linq 自訂物件 Except ");
+            Console.WriteLine();
+            Person[] data1 = {
+                new Person() { Name = "code6421", Age = 15 },
+                new Person() { Name = "mary", Age = 11 },
+                new Person() { Name = "jack", Age = 35 }
+            };
+            Person[] data2 = {
+                new Person() { Name = "mary", Age = 11 },
+                new Person() { Name = "jack", Age = 35 }
+            };
+            foreach (var item in data1.Except(data2))
+            {
+                Console.WriteLine(item.Name);
+            }
+        }
+
+        /// <summary>
+        /// TakeWhile SkipWhile 練習
+        /// </summary>
         private static void CWSix()
         {
             Console.WriteLine("TakeWhile SkipWhile 練習");
@@ -44,6 +67,10 @@ namespace LinqClassWork
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// Linq 取得 a 出現的次數 方法1
+        /// Linq 取得 a 出現的次數 方法2
+        /// </summary>
         private static void CWFive()
         {
             Person2[] data1 = {
@@ -69,6 +96,10 @@ namespace LinqClassWork
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// 使用 linq 查出 含有 b 的元素
+        /// string 陣列找出符合的元素
+        /// </summary>
         private static void CWFour()
         {
             //使用 linq 查出 含有 b 的元素
@@ -95,6 +126,9 @@ namespace LinqClassWork
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// IEnumerator 迭代子 ；底下實作內容與 for each 效果差不多
+        /// </summary>
         private static void CWThree()
         {
             int[] data = { 1, 3, 5, 7, 9 };
@@ -110,6 +144,9 @@ namespace LinqClassWork
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// Windows 資料夾中 .exe 檔案
+        /// </summary>
         private static void CWTwo()
         {
             //Linq 取得 Windows 資料夾中 .exe 檔案
@@ -139,6 +176,9 @@ namespace LinqClassWork
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// Linq 演化
+        /// </summary>
         private static void CWOne()
         {
             int[] data = { 1, 3, 5, 7, 9 };
@@ -182,5 +222,30 @@ namespace LinqClassWork
         public int ID { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
+    }
+
+    internal class Person
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is Person))
+                return false;
+            var o = obj as Person;
+            if (o.Name == Name && o.Age == Age)
+                return true;
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 13 * 7;
+            if (Name != null)
+                hash += Name.GetHashCode();
+            hash += Age.GetHashCode();
+            return hash;
+        }
     }
 }
