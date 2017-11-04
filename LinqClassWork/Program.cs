@@ -60,14 +60,27 @@ namespace LinqClassWork
             //Console.ReadLine();
 
             //使用 linq 查出 含有 b 的元素
+            Console.WriteLine("使用 linq 查出 含有 b 的元素 ");
 
-            Console.WriteLine("使用 linq 查出 含有 b 的元素");
-            string[] data2 = { "aa", "t", "ccc", "cb", "db", "tb" };
+            string[] data2 = { "aa", "t", "ccccc", "cb", "db", "tb" };
             var result3 = from s1 in data2 where s1.Contains("b") select s1;
             foreach (var item in result3)
             {
                 Console.WriteLine(item.ToString());
             }
+
+
+            //string 陣列找出符合的元素
+            Console.WriteLine("string 陣列找出符合的元素");
+
+            string[] infilter = { "bbbbb","ccccc"};
+
+            var result4 = from s1 in data2 where infilter.Contains(s1) select s1;
+            foreach (var item in result4)
+            {
+                Console.WriteLine(item.ToString());
+            }
+
 
             Console.WriteLine();
             Console.ReadLine();
