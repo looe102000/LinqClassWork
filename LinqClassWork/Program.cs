@@ -21,8 +21,42 @@ namespace LinqClassWork
             CWNine();
             CWTen();
             CWEleven();
+            CWTwelve();
 
             Console.ReadLine();
+        }
+
+        private static void CWTwelve()
+        {
+            Console.WriteLine("Linq Join 兩個欄位");
+            Console.WriteLine();
+
+            Department[] deps ={
+                new Department() { ID = 1, Name = "Developer" },
+                new Department() { ID = 2, Name = "Sales" },
+                new Department() { ID = 3, Name = "Support" }
+            };
+
+            Employee[] emps = {
+                new Employee() { ID = 1, Name = "code6421", Department_ID = 1 },
+                new Employee() { ID = 2, Name = "tom", Department_ID = 1 },
+                new Employee() { ID = 3, Name = "mary", Department_ID = 2 },
+                new Employee() { ID = 4, Name = "jack", Department_ID = 3 },
+            };
+
+            var result = from s1 in deps
+                         join s2 in emps on s1.ID equals s2.Department_ID into emp
+                         select new
+                         {
+                             Name = s1.Name,
+                             Employees = emp
+                         };
+            foreach (var item in result)
+            {
+                Console.WriteLine($"Department Name : {item.Name}");
+                foreach (var emp in item.Employees)
+                    Console.WriteLine($" Name : {emp.Name}");
+            }
         }
 
         private static void CWEleven()
@@ -45,7 +79,6 @@ namespace LinqClassWork
             }
             Console.WriteLine();
 
-
             // 1 : N
             Console.WriteLine("ToLookup");
 
@@ -67,7 +100,7 @@ namespace LinqClassWork
 
             int[] data1 = { 1, 3, 5, 7, 9 };
             int[] data2 = { 3, 7 };
-            foreach (var item in data1.Zip(data2, (x, y) => new { name=x,zip=y}))
+            foreach (var item in data1.Zip(data2, (x, y) => new { name = x, zip = y }))
             {
                 Console.WriteLine(item);
             }
@@ -335,5 +368,18 @@ namespace LinqClassWork
             hash += Age.GetHashCode();
             return hash;
         }
+    }
+
+    internal class Employee
+    {
+        public int ID { get; internal set; }
+        public string Name { get; internal set; }
+        public int Department_ID { get; internal set; }
+    }
+
+    internal class Department
+    {
+        public int ID { get; internal set; }
+        public string Name { get; internal set; }
     }
 }
