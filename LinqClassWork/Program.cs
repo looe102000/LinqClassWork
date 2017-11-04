@@ -15,8 +15,33 @@ namespace LinqClassWork
             CWThree();
             CWFour();
             CWFive();
+            CWSix();
 
             Console.ReadLine();
+        }
+
+        private static void CWSix()
+        {
+            Console.WriteLine("TakeWhile SkipWhile 練習");
+            Console.WriteLine();
+            int[] data = { 4, 3, 2, 4, 8 };
+
+            foreach (var item in data.TakeWhile((a, index) => a > 1 && a < 5))
+            {
+                Console.WriteLine("TakeWhile");
+                Console.WriteLine(item);
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("SkipWhile 練習");
+            Console.WriteLine();
+
+            foreach (var item in data.SkipWhile((a, index) => a > 1 && a < 5 && index < 2))
+            {
+                Console.WriteLine("SkipWhile");
+                Console.WriteLine(item);
+            }
+            Console.WriteLine();
         }
 
         private static void CWFive()
