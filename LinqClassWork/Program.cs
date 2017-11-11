@@ -23,7 +23,18 @@ namespace LinqClassWork
             CWEleven();
             CWTwelve();
 
+            CWoneone();
+
             Console.ReadLine();
+        }
+
+        private static List<Person> CWoneone()
+        {
+            const string characters = "";
+            String[] citys = { "Taipei", "NewYork" };
+
+            var random = new Random();
+            return Enumerable.Repeat<Person>(Person.Empty, 100).Select(s => { return new Person() { Name = new string(Enumerable.Repeat(characters, 10).Select(a => a[random.Next(a.Length)]).ToArray()), Age = random.Next(100), City = citys[random.Next(citys.Length)] }; }).ToList();
         }
 
         private static void CWTwelve()
@@ -51,11 +62,14 @@ namespace LinqClassWork
                              Name = s1.Name,
                              Employees = emp
                          };
-            foreach (var item in result)
+
+            var result2 = deps.Join(emps, dep => dep.ID, emp => emp.ID, (a, b) => new { Name = a.Name, Employees = b });
+
+            foreach (var item in result2)
             {
-                Console.WriteLine($"Department Name : {item.Name}");
-                foreach (var emp in item.Employees)
-                    Console.WriteLine($" Name : {emp.Name}");
+                //Console.WriteLine($"Department Name : {item.Name}");
+                //foreach (var emp in item.Employees)
+                //    Console.WriteLine($" Name : {emp.Name}");
             }
         }
 
@@ -347,8 +361,10 @@ namespace LinqClassWork
 
     internal class Person
     {
+        public static Person Empty { get; internal set; }
         public string Name { get; set; }
         public int Age { get; set; }
+        public string City { get; internal set; }
 
         public override bool Equals(object obj)
         {
